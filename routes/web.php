@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Models\Job;
 
 // Homepage
 Route::get('/', function () {
@@ -8,19 +9,18 @@ Route::get('/', function () {
 });
 
 // All Jobs
-use App\Models\Job;
-
 Route::get('/jobs', function () {
     return view('jobs', [
-        'jobs' => Job::with(['employer', 'tags'])->get()
+        'jobs' => Job::with(['employer', 'tags'])->paginate(10)
     ]);
 });
 
-
+// Single Job
 Route::get('/jobs/{id}', function ($id) {
     return view('job', [
-        'job' => Job::find($id)
+        'job' => Job::findOrFail($id)
     ]);
 });
+
 
 
