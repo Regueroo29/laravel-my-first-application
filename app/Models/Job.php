@@ -1,23 +1,20 @@
 <?php
+
 namespace App\Models;
 
-class Job
-{
-    public static function all()
-    {
-        return [
-            ['id' => 1, 'title' => 'Director', 'salary' => '$50,000'],
-            ['id' => 2, 'title' => 'Programmer', 'salary' => '$10,000'],
-            ['id' => 3, 'title' => 'Teacher', 'salary' => '$40,000'],
-        ];
-    }
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
-    public static function find($id)
+class Job extends Model
+{
+    use HasFactory;
+
+    // Tell Laravel to use the 'job_listings' table instead of the default 'jobs'
+    protected $table = 'job_listings';
+
+    // Define the relationship to Employer
+    public function employer()
     {
-        $job = \Illuminate\Support\Arr::first(static::all(), fn($job) => $job['id'] == $id);
-        if (! $job) {
-            abort(404);
-        }
-        return $job;
+        return $this->belongsTo(Employer::class);
     }
 }
