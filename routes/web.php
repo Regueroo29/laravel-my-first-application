@@ -12,9 +12,10 @@ use App\Models\Job;
 
 Route::get('/jobs', function () {
     return view('jobs', [
-        'jobs' => Job::all()
+        'jobs' => Job::with(['employer', 'tags'])->get()
     ]);
 });
+
 
 Route::get('/jobs/{id}', function ($id) {
     return view('job', [
