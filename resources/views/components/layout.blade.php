@@ -13,6 +13,7 @@
         <x-nav-link href="/" :active="request()->is('/')">Home</x-nav-link>
         <x-nav-link href="/jobs" :active="request()->is('jobs')">Jobs</x-nav-link>
         <x-nav-link href="/contact" :active="request()->is('contact')">Contact</x-nav-link>
+        <a href="/jobs/create" class="bg-indigo-600 text-white px-4 py-2 rounded">Create Job</a>    
     </div>
 </nav>
 
